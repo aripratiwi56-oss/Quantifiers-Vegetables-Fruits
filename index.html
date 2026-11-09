@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Maya Bahasa Inggris: Quantifiers & Fresh Market (Kelas 5 SD)</title>
+    <style>
+        /* --- RESET & LAYOUT CONTAINER (FIXED 16:9 ASPECT RATIO) --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            font-family: 'Fredoka', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #0f172a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 16:9 Aspect Ratio Viewport */
+        #app-viewport {
+            width: 100vw;
+            height: 56.25vw; /* 16:9 aspect ratio */
+            max-height: 100vh;
+            max-width: 177.78vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- SPLASH SCREEN --- */
+        #splash-screen {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #059669 0%, #10b981 40%, #0284c7 100%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+
+        .splash-badge {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.5rem 1.4rem;
+            border-radius: 9999px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .splash-title {
+            font-size: 2.3rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .splash-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            max-width: 650px;
+            font-weight: 500;
+        }
+
+        .progress-box {
+            width: 320px;
+            background: rgba(0, 0, 0, 0.3);
+            height: 18px;
+            border-radius: 9px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #f59e0b, #fbbf24);
+            border-radius: 9px;
+            transition: width 0.2s ease;
+        }
+
+        .splash-btn {
+            background: #f59e0b;
+            color: #0f172a;
+            font-size: 1.3rem;
+            font-weight: 800;
+            padding: 0.85rem 2.8rem;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.5);
+            transition: transform 0.2s, background 0.2s;
+            display: none;
+        }
+
+        .splash-btn:hover {
+            transform: translateY(-3px) scale(1.04);
+            background: #fbbf24;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            height: 60px;
+            background: #1e293b;
+            border-bottom: 2px solid #334155;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.25rem;
+            color: white;
+            z-index: 10;
+        }
+
+        .app-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .app-brand-icon {
+            width: 38px;
+            height: 38px;
+            background: #10b981;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+        }
+
+        .app-title-text {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #f8fafc;
+        }
+
+        .app-sub-text {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        nav {
+            display: flex;
+            gap: 0.4rem;
+            background: #0f172a;
+            padding: 0.3rem;
+            border-radius: 10px;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            padding: 0.5rem 0.9rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .nav-btn:hover {
+            color: #f8fafc;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-btn.active {
+            background: #10b981;
+            color: white;
+            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .icon-btn {
+            background: #334155;
+            border: none;
+            color: #f8fafc;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .icon-btn:hover {
+            background: #475569;
+        }
+
+        /* --- MAIN CONTENT AREA --- */
+        main {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            background: #0f172a;
+        }
+
+        .tab-content {
+            position: absolute;
+            inset: 0;
+            padding: 1.2rem;
+            display: none;
+            overflow-y: auto;
+            color: #f8fafc;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Custom Scrollbar */
+        .tab-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .tab-content::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        .tab-content::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+
+        /* --- TAB 1: TEORI --- */
+        .teori-section-title {
+            font-size: 1.1rem;
+            color: #38bdf8;
+            font-weight: 800;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .vocab-card {
+            background: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 10px;
+            padding: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .vocab-card:hover {
+            transform: translateY(-2px);
+            border-color: #10b981;
+        }
+
+        .vocab-icon {
+            font-size: 1.8rem;
+        }
+
+        .vocab-info h4 {
+            font-size: 0.9rem;
+            color: #f8fafc;
+        }
+
+        .vocab-tag {
+            font-size: 0.65rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 0.2rem;
+        }
+
+        .tag-countable { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
+        .tag-uncountable { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+
+        .grammar-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.85rem;
+        }
+
+        .grammar-card {
+            background: #1e293b;
+            border-radius: 10px;
+            padding: 0.85rem;
+            border-left: 5px solid #10b981;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .grammar-card.orange { border-left-color: #f59e0b; }
+        .grammar-card.purple { border-left-color: #a855f7; }
+        .grammar-card.blue { border-left-color: #0284c7; }
+
+        .grammar-header {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #f8fafc;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .grammar-body {
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            line-height: 1.35;
+        }
+
+        .grammar-example {
+            background: #0f172a;
+            padding: 0.4rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            color: #34d399;
+            font-style: italic;
+        }
+
+        /* --- TAB 2: PROSEDUR --- */
+        .procedure-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .step-card {
+            background: #1e293b;
+            padding: 0.85rem 1rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid #334155;
+        }
+
+        .step-num {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            font-weight: 800;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+        }
+
+        .step-info h4 {
+            font-size: 0.95rem;
+            color: #f8fafc;
+            margin-bottom: 0.2rem;
+        }
+
+        .step-info p {
+            font-size: 0.82rem;
+            color: #94a3b8;
+        }
+
+        /* --- TAB 3: SIMULASI --- */
+        .sim-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            height: 100%;
+            position: relative;
+        }
+
+        .sim-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1e293b;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            border: 1px solid #334155;
+        }
+
+        .sim-mode-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .mode-btn {
+            background: #0f172a;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .mode-btn.active {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        .sim-score-box {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #f59e0b;
+            background: #0f172a;
+            padding: 0.35rem 0.8rem;
+            border-radius: 6px;
+            border: 1px solid #334155;
+        }
+
+        /* MODE A: SORTING GAME */
+        .sim-area-sorting {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 0.85rem;
+            flex: 1;
+        }
+
+        .items-pool-box {
+            background: #1e293b;
+            border-radius: 10px;
+            padding: 0.75rem;
+            border: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .pool-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        .pool-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            overflow-y: auto;
+            max-height: 230px;
+        }
+
+        .drag-item {
+            background: #334155;
+            border: 2px solid #475569;
+            border-radius: 8px;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.2s;
+        }
+
+        .drag-item:hover {
+            border-color: #38bdf8;
+            background: #0284c7;
+        }
+
+        .sorting-baskets {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.85rem;
+        }
+
+        .basket-target {
+            background: #1e293b;
+            border: 2px dashed #475569;
+            border-radius: 12px;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .basket-target.drag-over {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .basket-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .basket-title.countable { color: #38bdf8; }
+        .basket-title.uncountable { color: #f59e0b; }
+
+        .basket-content {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            align-content: flex-start;
+            min-height: 120px;
+        }
+
+        /* MODE B: QUANTIFIER MACHINE */
+        .sim-area-machine {
+            display: none;
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid #334155;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .machine-card {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 1.2rem;
+            border: 2px solid #0284c7;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .machine-icon { font-size: 3rem; }
+        .machine-sentence { font-size: 1.2rem; font-weight: 700; color: #f8fafc; }
+
+        .machine-options {
+            display: flex;
+            gap: 0.6rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .opt-btn {
+            background: #334155;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .opt-btn:hover { background: #10b981; transform: scale(1.05); }
+
+        .sim-feedback-box {
+            background: rgba(15, 23, 42, 0.9);
+            border: 2px solid #38bdf8;
+            padding: 0.65rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            text-align: center;
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .sim-controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+
+        .reset-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .reset-btn:hover { background: #dc2626; }
+
+        /* --- TAB 4: LKPD --- */
+        .lkpd-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 1.2rem;
+            border: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .lkpd-header {
+            border-bottom: 2px dashed #334155;
+            padding-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lkpd-inputs {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .lkpd-field {
+            background: #0f172a;
+            border: 1px solid #475569;
+            color: white;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            flex: 1;
+        }
+
+        .lkpd-q-box {
+            background: #0f172a;
+            padding: 0.8rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            border: 1px solid #334155;
+            transition: border-color 0.2s;
+        }
+
+        .lkpd-q-box.correct { border-color: #10b981; background: rgba(16, 185, 129, 0.05); }
+        .lkpd-q-box.incorrect { border-color: #ef4444; background: rgba(239, 68, 68, 0.05); }
+
+        .lkpd-q-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #38bdf8;
+        }
+
+        .lkpd-options {
+            display: flex;
+            gap: 0.8rem;
+            font-size: 0.82rem;
+            margin-top: 0.2rem;
+            flex-wrap: wrap;
+        }
+
+        .lkpd-options label {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            cursor: pointer;
+        }
+
+        .lkpd-explanation {
+            font-size: 0.78rem;
+            margin-top: 0.3rem;
+            padding: 0.4rem 0.6rem;
+            border-radius: 6px;
+            display: none;
+            line-height: 1.35;
+        }
+
+        .lkpd-explanation.show-correct {
+            display: block;
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+        }
+
+        .lkpd-explanation.show-incorrect {
+            display: block;
+            background: rgba(239, 68, 68, 0.15);
+            color: #fca5a5;
+        }
+
+        .grade-badge {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.15);
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            display: none;
+        }
+
+        /* --- TAB 5: PENGEMBANG --- */
+        .dev-card {
+            max-width: 750px;
+            margin: 0 auto;
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #334155;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .dev-avatar {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, #10b981, #0284c7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .dev-details h3 {
+            font-size: 1.3rem;
+            color: #38bdf8;
+            margin-bottom: 0.2rem;
+        }
+
+        .dev-details p {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            line-height: 1.4;
+        }
+
+        .cp-box {
+            margin-top: 0.6rem;
+            background: #0f172a;
+            padding: 0.6rem;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            color: #94a3b8;
+            border-left: 3px solid #10b981;
+        }
+
+        /* --- TOAST NOTIFICATION --- */
+        #toast {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 0.65rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+            display: none;
+            z-index: 50;
+            animation: fadeIn 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive UI Adjustment for Mobile Aspect Ratio */
+        @media (max-width: 768px) {
+            .vocab-grid { grid-template-columns: repeat(2, 1fr); }
+            .grammar-grid { grid-template-columns: 1fr; }
+            .sim-area-sorting { grid-template-columns: 1fr; }
+            .dev-card { flex-direction: column; text-align: center; }
+            .splash-title { font-size: 1.6rem; }
+            .splash-subtitle { font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MAIN VIEWPORT CONTAINER (16:9 FIXED ASPECT RATIO) -->
+    <div id="app-viewport">
+        
+        <!-- SPLASH SCREEN -->
+        <div id="splash-screen">
+            <div class="splash-badge">VIRTUAL LAB BAHASA INGGRIS SD - FASE C</div>
+            <h1 class="splash-title">Quantifiers & Fresh Market 🍎🥦</h1>
+            <p class="splash-subtitle">Mari Belajar Membedakan Nouns & Menggunakan Kata Penunjuk Jumlah (Quantifiers) dengan Seru!</p>
+            
+            <div class="progress-box" id="progress-box">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <button class="splash-btn" id="start-btn">🛒 Mulai Lab Maya</button>
+        </div>
+
+        <!-- HEADER & NAVIGATION -->
+        <header>
+            <div class="app-brand">
+                <div class="app-brand-icon">🧺</div>
+                <div>
+                    <div class="app-title-text">Fresh Market Lab</div>
+                    <div class="app-sub-text">Grade 5 SD • English Quantifiers</div>
+                </div>
+            </div>
+
+            <nav>
+                <button class="nav-btn active" data-tab="teori">📚 Teori</button>
+                <button class="nav-btn" data-tab="prosedur">📋 Prosedur</button>
+                <button class="nav-btn" data-tab="simulasi">🎮 Simulasi</button>
+                <button class="nav-btn" data-tab="lkpd">📝 LKPD</button>
+                <button class="nav-btn" data-tab="pengembang">👤 Pengembang</button>
+            </nav>
+
+            <div class="header-actions">
+                <button class="icon-btn" id="sound-toggle" title="Toggle Efek Suara">🔊</button>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT AREA -->
+        <main>
+
+            <!-- TAB 1: TEORI -->
+            <div class="tab-content active" id="tab-teori">
+                <div class="teori-section-title">🍓 Core Vocabulary Cards (Klik untuk mendengarkan pengucapan!)</div>
+                <div class="vocab-grid">
+                    <div class="vocab-card" onclick="speakWord('Apples')">
+                        <div class="vocab-icon">🍎</div>
+                        <div class="vocab-info">
+                            <h4>Apples</h4>
+                            <span class="vocab-tag tag-countable">Countable</span>
+                        </div>
+                    </div>
+                    <div class="vocab-card" onclick="speakWord('Bananas')">
+                        <div class="vocab-icon">🍌</div>
+                        <div class="vocab-info">
+                            <h4>Bananas</h4>
+                            <span class="vocab-tag tag-countable">Countable</span>
+                        </div>
+                    </div>
+                    <div class="vocab-card" onclick="speakWord('Carrots')">
+                        <div class="vocab-icon">🥕</div>
+                        <div class="vocab-info">
+                            <h4>Carrots</h4>
+                            <span class="vocab-tag tag-countable">Countable</span>
+                        </div>
+                    </div>
+                    <div class="vocab-card" onclick="speakWord('Chilies')">
+                        <div class="vocab-icon">🌶️</div>
+                        <div class="vocab-info">
+                            <h4>Chilies</h4>
+                            <span class="vocab-tag tag-countable">Countable</span>
+                        </div>
+                    </div>
+                    <div class="vocab-card" onclick="speakWord('Fruit Juice')">
+                        <div class="vocab-icon">🧃</div>
+                        <div class="vocab-info">
+                            <h4>Fruit Juice</h4>
+                            <span class="vocab-tag tag-uncountable">Uncountable</span>
+                        </div>
+                    </div>
+                    <div class="vocab-card" onclick="speakWord('Water')">
+                        <div class="vocab-icon">💧</div>
+                        <div class="vocab-info">
+                            <h4>Water</h4>
+                            <span class="vocab-tag tag-uncountable">Uncountable</span>
+                        </div>
+                    </div>
+                    <div class="vocab-card" onclick="speakWord('Soup')">
+                        <div class="vocab-icon">🍲</div>
+                        <div class="vocab-info">
+                            <h4>Soup</h4>
+                            <span class="vocab-tag tag-uncountable">Uncountable</span>
+                        </div>
+                    </div>
+                    <div class="vocab-card" onclick="speakWord('Sugar')">
+                        <div class="vocab-icon">🧂</div>
+                        <div class="vocab-info">
+                            <h4>Sugar</h4>
+                            <span class="vocab-tag tag-uncountable">Uncountable</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="teori-section-title">📖 Grammar Rules: Quantifiers</div>
+                <div class="grammar-grid">
+                    <div class="grammar-card">
+                        <div class="grammar-header">
+                            <span>Some vs Any</span>
+                            <span>➕ / ➖ ❓</span>
+                        </div>
+                        <div class="grammar-body">
+                            <strong>Some:</strong> Digunakan pada kalimat positif (+).<br>
+                            <strong>Any:</strong> Digunakan pada kalimat negatif (-) dan pertanyaan (?).
+                        </div>
+                        <div class="grammar-example">
+                            • (+) I have <u>some</u> apples.<br>
+                            • (-) I don't have <u>any</u> sugar.
+                        </div>
+                    </div>
+
+                    <div class="grammar-card orange">
+                        <div class="grammar-header">
+                            <span>A few vs A little</span>
+                            <span>🔢 vs 💧</span>
+                        </div>
+                        <div class="grammar-body">
+                            <strong>A few:</strong> Sedikit (untuk benda yang bisa dihitung).<br>
+                            <strong>A little:</strong> Sedikit (untuk benda yang tidak bisa dihitung).
+                        </div>
+                        <div class="grammar-example">
+                            • There are <u>a few</u> bananas.<br>
+                            • Add <u>a little</u> honey to tea.
+                        </div>
+                    </div>
+
+                    <div class="grammar-card purple">
+                        <div class="grammar-header">
+                            <span>A lot of</span>
+                            <span>📦📦📦</span>
+                        </div>
+                        <div class="grammar-body">
+                            <strong>A lot of:</strong> Banyak (Bisa digunakan untuk benda countable maupun uncountable).
+                        </div>
+                        <div class="grammar-example">
+                            • We buy <u>a lot of</u> watermelons.<br>
+                            • She drinks <u>a lot of</u> juice.
+                        </div>
+                    </div>
+
+                    <div class="grammar-card blue">
+                        <div class="grammar-header">
+                            <span>How many vs How much</span>
+                            <span>❓ Berapa banyak</span>
+                        </div>
+                        <div class="grammar-body">
+                            <strong>How many...?</strong> Menanyakan benda yang bisa dihitung.<br>
+                            <strong>How much...?</strong> Menanyakan benda yang tidak bisa dihitung.
+                        </div>
+                        <div class="grammar-example">
+                            • <u>How many</u> carrots do you need?<br>
+                            • <u>How much</u> water do we have?
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: PROSEDUR -->
+            <div class="tab-content" id="tab-prosedur">
+                <div class="procedure-container">
+                    <div class="teori-section-title">📌 Panduan Aktivitas Lab Maya</div>
+                    
+                    <div class="step-card">
+                        <div class="step-num">1</div>
+                        <div class="step-info">
+                            <h4>Pelajari Kategori Noun (Kata Benda)</h4>
+                            <p>Buka tab <strong>Teori</strong> untuk memahami perbedaan antara <em>Countable Nouns</em> (bisa dihitung) dan <em>Uncountable Nouns</em> (tidak bisa dihitung).</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-num">2</div>
+                        <div class="step-card-info">
+                            <h4>Mainkan Game Simulasi Mode 1: Sorting Bins</h4>
+                            <p>Pindahkan (Drag / Tap) item bahan makanan di tab <strong>Simulasi</strong> ke dalam keranjang <em>Countable</em> atau wadah <em>Uncountable</em> yang tepat.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-num">3</div>
+                        <div class="step-info">
+                            <h4>Mainkan Game Simulasi Mode 2: Quantifier Machine</h4>
+                            <p>Ganti mode ke <strong>Quantifier Machine</strong>, lalu pilih kata <em>some, any, a few, a little, how many,</em> atau <em>how much</em> yang cocok untuk melengkapi kalimat belanja.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-num">4</div>
+                        <div class="step-info">
+                            <h4>Kerjakan Digital LKPD & Dapatkan Nilai</h4>
+                            <p>Buka tab <strong>LKPD</strong>, isi nama dan kelas, jawab pertanyaan, lalu klik tombol <strong>Kirim & Periksa Nilai</strong> untuk mendapatkan evaluasi instan!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: SIMULASI -->
+            <div class="tab-content" id="tab-simulasi">
+                <div class="sim-container">
+                    <div class="sim-header-bar">
+                        <div class="sim-mode-toggle">
+                            <button class="mode-btn active" id="btn-mode-a">Mode 1: Sorting Nouns</button>
+                            <button class="mode-btn" id="btn-mode-b">Mode 2: Quantifier Machine</button>
+                        </div>
+                        <div class="sim-score-box">Skor: <span id="sim-score">0</span></div>
+                        <button class="reset-btn" id="sim-reset-btn">🔄 Reset</button>
+                    </div>
+
+                    <!-- MODE A: SORTING -->
+                    <div class="sim-area-sorting" id="mode-a-area">
+                        <div class="items-pool-box">
+                            <div class="pool-title">🛒 Grocery Items (Drag/Tap Item)</div>
+                            <div class="pool-grid" id="items-pool">
+                                <!-- Dynamic item cards generated here -->
+                            </div>
+                        </div>
+
+                        <div class="sorting-baskets">
+                            <div class="basket-target" data-type="countable">
+                                <div class="basket-title countable">🧺 Countable Basket</div>
+                                <div class="basket-content" id="basket-countable"></div>
+                            </div>
+                            <div class="basket-target" data-type="uncountable">
+                                <div class="basket-title uncountable">🧃 Uncountable Pitcher</div>
+                                <div class="basket-content" id="basket-uncountable"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MODE B: QUANTIFIER MACHINE -->
+                    <div class="sim-area-machine" id="mode-b-area">
+                        <div class="machine-card">
+                            <div class="machine-icon" id="m-icon">🥕</div>
+                            <div class="machine-sentence" id="m-sentence">
+                                I need <span id="m-target">_____</span> carrots for the soup.
+                            </div>
+                            <div class="machine-options" id="m-options">
+                                <!-- Option buttons dynamic -->
+                            </div>
+                            <div class="sim-feedback-box" id="m-feedback">
+                                💡 Choose the right quantifier based on whether the noun is countable/uncountable and if it's positive, negative, or a question!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: LKPD -->
+            <div class="tab-content" id="tab-lkpd">
+                <div class="lkpd-container">
+                    <div class="lkpd-header">
+                        <div>
+                            <h3 style="color: #38bdf8;">Digital LKPD: 10 Quantifiers Questions</h3>
+                            <p style="font-size: 0.8rem; color: #94a3b8;">Lembar Kerja Peserta Didik kelas 5 SD (Fase C)</p>
+                        </div>
+                        <div class="grade-badge" id="grade-badge">Nilai: 0 / 100</div>
+                    </div>
+
+                    <div class="lkpd-inputs">
+                        <input type="text" id="student-name" class="lkpd-field" placeholder="Nama Siswa..." />
+                        <input type="text" id="student-class" class="lkpd-field" placeholder="Kelas..." />
+                    </div>
+
+                    <!-- Question 1 -->
+                    <div class="lkpd-q-box" id="box-q1">
+                        <div class="lkpd-q-title">1. My mother buys _______ apples at the market. 🍎 (+)</div>
+                        <div class="lkpd-options">
+                            <label><input type="radio" name="q1" value="some"> some</label>
+                            <label><input type="radio" name="q1" value="any"> any</label>
+                            <label><input type="radio" name="q1" value="a little"> a little</label>
+                        </div>
+                        <div class="lkpd-explanation" id="exp-q1"></div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="lkpd-q-box" id="box-q2">
+                        <div class="lkpd-q-title">2. We don't have _______ fruit juice in the fridge. 🧃 (-)</div>
+                        <div class="lkpd-options">
+                            <label><input type="radio" name="q2" value="some"> some</label>
+                            <label><input type="radio" name="q2" value="any"> any</label>
+                            <label><input type="radio" name="q2" value="a few"> a few</label>
+                        </div>
+                        <div class="lkpd-explanation" id="exp-q2"></div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="lkpd-q-box" id="box-q3">
+                        <div class="lkpd-q-title">3. _______ watermelons are on the table? 🍉 (Countable)</div>
+                        <div class="lkpd-options">
+                            <label><input type="radio" name="q3" value="How much"> How much</label>
+                            <label><input type="radio" name="q3" value="How many"> How many</label>
+                            <label><input type="radio" name="q3" value="A little"> A little</label>
+                        </div>
+                        <div class="lkpd-explanation" id="exp-q3"></div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="lkpd-q-box" id="box-q4">
+                        <div class="lkpd-q-title">4. Please add _______ honey to my tea. 🍯 (Uncountable - sedikit)</div>
+                        <div class="lkpd-options">
+                            <label><input type="radio" name="q4" value="a few"> a few</label>
+                            <label><input type="radio" name="q4" value="a little"> a little</label>
+                            <label><input type="radio" name="q4" value="how many"> how many</label>
+                        </div>
+                        <div class="lkpd-explanation" id="exp-q4"></div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="lkpd-q-box" id="box-q5">
+                        <div class="lkpd-q-title">5. I only have _______ bananas left in the basket. 🍌 (Countable - sedikit)</div>
+                        <div class="lkpd-options">
+                            <label><input type="radio" name="q5" value="a few"> a few</label>
+                            <label><input type="radio" name="q5" value="a little"> a little</label>
+                            <label><input type="radio" name="q5" value="any"> any</label>
+                        </div>
+                        <div class="lkpd-explanation" id="exp-q5"></div>
+                    </div>
+
+                    <!-- Question 6 -->
+                    <div class="lkpd-q-box" id="box-q6">
+                        <div class="lkpd-q-title">6. _______ water do you drink every day? 💧 (Uncountable)</div>
+                        <div class="lkpd-options">
+                            <label><input type="radio" name="q6" value="How many"> How many</label>
+                            <label><input type="radio" name="q6" value="How much"> How much</label>
+                            <label><input type="radio" name="q6" value="A few"> A few</label>
+                        </div>
+                        <div class="lkpd-explanation" id="exp-q6"></div>
+                    </div>
+
+                    <!-- Question 7 -->
+                    <div class="lkpd-q-box" id="box-q7">
+                        <div class="lkpd-q-title">7. Do you have _______ chilies to cook the soup? 🌶️ (?)</div>
+                        <div class="lkpd-options">
+                            <label><input type="radio" name="q7" value="some"> some</label>
+                            <label><input type="radio" name="q7" value="any"> any</label>
+                            <label><input type="radio" name="q7" value="a little"> a little</label>
+                        </div>
+                        <div class="lkpd-explanation" id="exp-q7"></div>
+                    </div>
+
+                    <!-- Question 8 -->
+                    <div class="lkpd-q-box" id="box-q8">
+                        <div class="lkpd-q-title">8. There is _______ sugar in this tea. It is very sweet! 🧂 (Sangat banyak)</div>
+                        <div class="lkpd-options">
+                            <label><input type="radio" name="q8" value="a lot of"> a lot of</label>
+                            <label><input type="radio" name="q8" value="a few"> a few</label>
+                            <label><input type="radio" name="q8" value="any"> any</label>
+                        </div>
+                        <div class="lkpd-explanation" id="exp-q8"></div>
+                    </div>
+
+                    <!-- Question 9 -->
+                    <div class="lkpd-q-box" id="box-q9">
+                        <div class="lkpd-q-title">9. There are _______ carrots in the kitchen to make soup. 🥕 (Countable - beberapa (+))</div>
+                        <div class="lkpd-options">
+                            <label><input type="radio" name="q9" value="some"> some</label>
+                            <label><input type="radio" name="q9" value="any"> any</label>
+                            <label><input type="radio" name="q9" value="a little"> a little</label>
+                        </div>
+                        <div class="lkpd-explanation" id="exp-q9"></div>
+                    </div>
+
+                    <!-- Question 10 -->
+                    <div class="lkpd-q-box" id="box-q10">
+                        <div class="lkpd-q-title">10. I don't want _______ soup right now. 🍲 (-)</div>
+                        <div class="lkpd-options">
+                            <label><input type="radio" name="q10" value="some"> some</label>
+                            <label><input type="radio" name="q10" value="any"> any</label>
+                            <label><input type="radio" name="q10" value="a few"> a few</label>
+                        </div>
+                        <div class="lkpd-explanation" id="exp-q10"></div>
+                    </div>
+
+                    <div class="sim-controls">
+                        <button class="reset-btn" id="reset-lkpd-btn">🔄 Reset LKPD</button>
+                        <button class="btn-primary" id="submit-lkpd-btn" style="background: #10b981; color: white; border: none; padding: 0.6rem 1.4rem; border-radius: 8px; font-weight: bold; cursor: pointer;">💾 Kirim & Periksa Nilai</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 5: PENGEMBANG -->
+            <div class="tab-content" id="tab-pengembang">
+                <div class="dev-card">
+                    <div class="dev-avatar">👩‍🏫</div>
+                    <div class="dev-details">
+                        <h3>Pengembang Lab Maya Bahasa Inggris</h3>
+                        <p><strong>Mata Pelajaran:</strong> Bahasa Inggris (Elementary School)</p>
+                        <p><strong>Topik:</strong> Quantifiers & Fresh Market Vocabulary</p>
+                        <p><strong>Fase/Kelas:</strong> Fase C / Kelas 5 SD</p>
+                        <div class="cp-box">
+                            <strong>Capaian Pembelajaran (CP):</strong> Peserta didik mampu mengidentifikasi, merespons, dan menggunakan kata penunjuk jumlah (quantifiers) secara tepat dalam konteks percakapan dan teks deskriptif sederhana tentang makanan dan minuman.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast">Message</div>
+
+    <!-- SOUND SYNTHESIZER & SCRIPT LOGIC -->
+    <script>
+        /* --- OFFLINE WEB AUDIO SYNTHESIZER --- */
+        class SoundEngine {
+            constructor() {
+                this.ctx = null;
+                this.enabled = true;
+            }
+
+            init() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+            }
+
+            playClick() {
+                if (!this.enabled) return;
+                this.init();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(500, this.ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(250, this.ctx.currentTime + 0.05);
+                gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.05);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.05);
+            }
+
+            playSuccess() {
+                if (!this.enabled) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, now); // C5
+                osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+                osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.3);
+            }
+
+            playError() {
+                if (!this.enabled) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(200, now);
+                osc.frequency.linearRampToValueAtTime(120, now + 0.15);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.15);
+            }
+        }
+
+        const sound = new SoundEngine();
+
+        /* --- SPEECH SYNTHESIS FOR VOCABULARY --- */
+        function speakWord(text) {
+            sound.playClick();
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        /* --- SPLASH SCREEN LOADING --- */
+        window.addEventListener('load', () => {
+            const progressBar = document.getElementById('progress-bar');
+            const startBtn = document.getElementById('start-btn');
+            const progressBox = document.getElementById('progress-box');
+
+            let progress = 0;
+            const timer = setInterval(() => {
+                progress += 20;
+                if (progress > 100) progress = 100;
+                progressBar.style.width = progress + '%';
+
+                if (progress === 100) {
+                    clearInterval(timer);
+                    setTimeout(() => {
+                        progressBox.style.display = 'none';
+                        startBtn.style.display = 'inline-block';
+                    }, 300);
+                }
+            }, 100);
+        });
+
+        document.getElementById('start-btn').addEventListener('click', () => {
+            sound.playSuccess();
+            const splash = document.getElementById('splash-screen');
+            splash.style.opacity = '0';
+            setTimeout(() => { splash.style.visibility = 'hidden'; }, 500);
+        });
+
+        // Sound Toggle
+        const soundBtn = document.getElementById('sound-toggle');
+        soundBtn.addEventListener('click', () => {
+            sound.enabled = !sound.enabled;
+            soundBtn.textContent = sound.enabled ? '🔊' : '🔇';
+            showToast(sound.enabled ? 'Suara Aktif' : 'Suara Diheningkan');
+        });
+
+        /* --- NAVIGATION LOGIC --- */
+        const navButtons = document.querySelectorAll('.nav-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        navButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                sound.playClick();
+                const targetTab = btn.getAttribute('data-tab');
+
+                navButtons.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+
+                btn.classList.add('active');
+                document.getElementById(`tab-${targetTab}`).classList.add('active');
+            });
+        });
+
+        /* --- SIMULATION LOGIC --- */
+        let score = 0;
+
+        // MODE A ITEMS
+        const poolItems = [
+            { id: 1, name: 'Apples 🍎', type: 'countable', desc: 'Apples can be counted individually (1 apple, 2 apples).' },
+            { id: 2, name: 'Water 💧', type: 'uncountable', desc: 'Water is a liquid and cannot be counted individually.' },
+            { id: 3, name: 'Bananas 🍌', type: 'countable', desc: 'Bananas are distinct fruits you can count easily.' },
+            { id: 4, name: 'Fruit Juice 🧃', type: 'uncountable', desc: 'Juice is liquid, measured in glasses/liters, not individual units.' },
+            { id: 5, name: 'Carrots 🥕', type: 'countable', desc: 'Carrots are separate vegetables that take plural forms (carrots).' },
+            { id: 6, name: 'Sugar 🧂', type: 'uncountable', desc: 'Sugar consists of tiny grains, so it is treated as uncountable.' },
+            { id: 7, name: 'Chilies 🌶️', type: 'countable', desc: 'Chilies can be counted individually.' },
+            { id: 8, name: 'Soup 🍲', type: 'uncountable', desc: 'Soup is liquid food and cannot be pluralized directly.' }
+        ];
+
+        function initModeA() {
+            const pool = document.getElementById('items-pool');
+            pool.innerHTML = '';
+            document.getElementById('basket-countable').innerHTML = '';
+            document.getElementById('basket-uncountable').innerHTML = '';
+
+            poolItems.sort(() => Math.random() - 0.5).forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'drag-item';
+                card.draggable = true;
+                card.textContent = item.name;
+                card.setAttribute('data-type', item.type);
+
+                card.addEventListener('dragstart', (e) => {
+                    sound.playClick();
+                    e.dataTransfer.setData('text/plain', JSON.stringify(item));
+                });
+
+                pool.appendChild(card);
+            });
+        }
+
+        // Drop Area Listeners with Enhanced Educational Feedback
+        document.querySelectorAll('.basket-target').forEach(basket => {
+            basket.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                basket.classList.add('drag-over');
+            });
+
+            basket.addEventListener('dragleave', () => {
+                basket.classList.remove('drag-over');
+            });
+
+            basket.addEventListener('drop', (e) => {
+                e.preventDefault();
+                basket.classList.remove('drag-over');
+                const item = JSON.parse(e.dataTransfer.getData('text/plain'));
+                const targetType = basket.getAttribute('data-type');
+
+                if (item.type === targetType) {
+                    sound.playSuccess();
+                    score += 10;
+                    showToast(`✅ Correct! ${item.desc}`);
+                    
+                    const elem = document.createElement('div');
+                    elem.className = 'drag-item';
+                    elem.style.background = '#10b981';
+                    elem.textContent = item.name;
+                    basket.querySelector('.basket-content').appendChild(elem);
+
+                    // Remove from pool
+                    document.querySelectorAll('.drag-item').forEach(el => {
+                        if (el.textContent === item.name) el.remove();
+                    });
+                } else {
+                    sound.playError();
+                    showToast(`❌ Oops! ${item.name} is ${item.type.toUpperCase()}. ${item.desc}`);
+                }
+                document.getElementById('sim-score').textContent = score;
+            });
+        });
+
+        // MODE B MACHINE WITH EXPLANATIONS
+        const machineQuestions = [
+            { icon: '🥕', sentence: 'I need _____ carrots for the soup.', answer: 'a few', options: ['a few', 'a little', 'how much'], explain: '"a few" is used for small quantities of countable nouns like carrots!' },
+            { icon: '🧃', sentence: 'Do you have _____ fruit juice in the pitcher?', answer: 'any', options: ['some', 'any', 'a few'], explain: '"any" is used in questions (?) for uncountable/countable nouns!' },
+            { icon: '🍎', sentence: '_____ apples are there on the table?', answer: 'How many', options: ['How much', 'How many', 'A little'], explain: '"How many" asks about the quantity of countable items (apples)!' },
+            { icon: '🍯', sentence: 'Add _____ honey to my morning tea.', answer: 'a little', options: ['a few', 'a little', 'how many'], explain: '"a little" is used for small amounts of uncountable liquids like honey!' },
+            { icon: '🍉', sentence: 'We bought _____ watermelons for the party.', answer: 'a lot of', options: ['a lot of', 'a little', 'how much'], explain: '"a lot of" means a large quantity and works for countable watermelons!' }
+        ];
+
+        let mIdx = 0;
+
+        function loadMachineQuestion() {
+            const q = machineQuestions[mIdx];
+            document.getElementById('m-icon').textContent = q.icon;
+            document.getElementById('m-sentence').innerHTML = q.sentence.replace('_____', '<span style="color:#f59e0b;">_____</span>');
+            document.getElementById('m-feedback').innerHTML = `💡 <strong>Hint:</strong> Look at the sentence type (+, -, ?) and whether the noun is countable or uncountable!`;
+            
+            const optsContainer = document.getElementById('m-options');
+            optsContainer.innerHTML = '';
+
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.textContent = opt;
+                btn.onclick = () => {
+                    if (opt === q.answer) {
+                        sound.playSuccess();
+                        score += 15;
+                        document.getElementById('m-feedback').innerHTML = `✅ <strong>Great Job!</strong> ${q.explain}`;
+                        showToast('🎉 Excellent choice!');
+                        setTimeout(() => {
+                            mIdx = (mIdx + 1) % machineQuestions.length;
+                            loadMachineQuestion();
+                        }, 1800);
+                    } else {
+                        sound.playError();
+                        document.getElementById('m-feedback').innerHTML = `❌ <strong>Not quite!</strong> Try again. Remember: ${q.explain}`;
+                        showToast('❌ Try another quantifier!');
+                    }
+                    document.getElementById('sim-score').textContent = score;
+                };
+                optsContainer.appendChild(btn);
+            });
+        }
+
+        // Mode Toggles
+        document.getElementById('btn-mode-a').addEventListener('click', () => {
+            sound.playClick();
+            document.getElementById('btn-mode-a').classList.add('active');
+            document.getElementById('btn-mode-b').classList.remove('active');
+            document.getElementById('mode-a-area').style.display = 'grid';
+            document.getElementById('mode-b-area').style.display = 'none';
+        });
+
+        document.getElementById('btn-mode-b').addEventListener('click', () => {
+            sound.playClick();
+            document.getElementById('btn-mode-b').classList.add('active');
+            document.getElementById('btn-mode-a').classList.remove('active');
+            document.getElementById('mode-a-area').style.display = 'none';
+            document.getElementById('mode-b-area').style.display = 'flex';
+            loadMachineQuestion();
+        });
+
+        document.getElementById('sim-reset-btn').addEventListener('click', () => {
+            sound.playClick();
+            score = 0;
+            document.getElementById('sim-score').textContent = score;
+            initModeA();
+            showToast('Simulasi Di-reset');
+        });
+
+        initModeA();
+
+        /* --- LKPD EVALUATION LOGIC (10 QUESTIONS) --- */
+        const lkpdAnswers = {
+            q1: { ans: 'some', exp: 'Correct! "some" is used in positive sentences (+).' },
+            q2: { ans: 'any', exp: 'Correct! "any" is used in negative sentences (-).' },
+            q3: { ans: 'How many', exp: 'Correct! "How many" asks about countable nouns (watermelons).' },
+            q4: { ans: 'a little', exp: 'Correct! "a little" means a small amount of uncountable nouns (honey).' },
+            q5: { ans: 'a few', exp: 'Correct! "a few" means a small quantity of countable nouns (bananas).' },
+            q6: { ans: 'How much', exp: 'Correct! "How much" asks about uncountable liquids (water).' },
+            q7: { ans: 'any', exp: 'Correct! "any" is used in questions (?).' },
+            q8: { ans: 'a lot of', exp: 'Correct! "a lot of" indicates a large quantity.' },
+            q9: { ans: 'some', exp: 'Correct! "some" is used for positive statements (+).' },
+            q10: { ans: 'any', exp: 'Correct! "any" is used with negative verbs (don\'t want).' }
+        };
+
+        document.getElementById('submit-lkpd-btn').addEventListener('click', () => {
+            const name = document.getElementById('student-name').value.trim();
+            const cls = document.getElementById('student-class').value.trim();
+
+            if (!name || !cls) {
+                sound.playError();
+                showToast('⚠️ Isi Nama dan Kelas Terlebih Dahulu!');
+                return;
+            }
+
+            let correctCount = 0;
+
+            for (let i = 1; i <= 10; i++) {
+                const qKey = `q${i}`;
+                const userAns = document.querySelector(`input[name="${qKey}"]:checked`)?.value;
+                const box = document.getElementById(`box-${qKey}`);
+                const exp = document.getElementById(`exp-${qKey}`);
+                const answerData = lkpdAnswers[qKey];
+
+                box.classList.remove('correct', 'incorrect');
+                exp.classList.remove('show-correct', 'show-incorrect');
+
+                if (userAns === answerData.ans) {
+                    correctCount++;
+                    box.classList.add('correct');
+                    exp.classList.add('show-correct');
+                    exp.innerHTML = `✅ <strong>Jawaban Benar!</strong> ${answerData.exp}`;
+                } else {
+                    box.classList.add('incorrect');
+                    exp.classList.add('show-incorrect');
+                    exp.innerHTML = `❌ <strong>Salah!</strong> Jawaban yang benar adalah <strong>${answerData.ans}</strong>. ${answerData.exp}`;
+                }
+            }
+
+            const finalGrade = correctCount * 10;
+            sound.playSuccess();
+            const badge = document.getElementById('grade-badge');
+            badge.style.display = 'inline-block';
+            badge.textContent = `Nilai: ${finalGrade} / 100 (${correctCount}/10 Benar)`;
+            showToast(`✅ LKPD Selesai! Nilai Kamu: ${finalGrade}`);
+        });
+
+        document.getElementById('reset-lkpd-btn').addEventListener('click', () => {
+            sound.playClick();
+            document.querySelectorAll('.lkpd-q-box').forEach(box => {
+                box.classList.remove('correct', 'incorrect');
+            });
+            document.querySelectorAll('.lkpd-explanation').forEach(exp => {
+                exp.classList.remove('show-correct', 'show-incorrect');
+                exp.innerHTML = '';
+            });
+            document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+            document.getElementById('grade-badge').style.display = 'none';
+            showToast('LKPD Berhasil Di-reset');
+        });
+
+        /* --- TOAST HELPER --- */
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2600);
+        }
+    </script>
+</body>
+</html>
